@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/Home.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a class ="active" href="change">Change admin password</a></li>
+            <li><a href="getUsers">Get All the users</a></li>
+            <li> <a href="getProducts">Get All the Products</a></li>
+            <li style="float:right"> <a href="purchaseHistory">Get All the Purchase records</a></li>
+        </ul>
+    </nav>
+    <div class="row">
+        <div class="card text-center">
+            <h2  class="card-header">Search User</h2>
+            <form action="searchUser">
+                <input class="username" type="text" name="name" placeholder="Enter name of user">
+                <Button class="signin-button" type="submit" value="click">Search</Button>
+            </form>
+        </div>
+
+        <div class="card text-center">
+            <h2  class="card-header">Add product</h2>
+            <form action="addProduct" method="post">
+                <input class="username" type="text" name="productName" placeholder="product name">
+                <input class="username" type="text" name="category" placeholder="category">
+                <input class="username" type="number" name="cost" placeholder="cost">
+                <Button class="signin-button" type="submit" value="click">Add Product</Button>
+            </form>
+        </div>
+
+
+
+
+    </div>
+    <div class="row">
+        <div class="card text-center">
+            <h2 class="card-header">Delete Product</h2>
+
+            <form action="delProduct" method="post">
+                <input class="username" type="number" name="id" placeholder="Enter Product Id">
+                <Button class="signin-button" type="submit" value="click">Delete Product</Button>
+            </form>
+        </div>
+        <div class="card text-center">
+            <h2 class="card-header">Update product</h2>
+            <form action="updateProduct" method="post" >
+
+                <input class="username" type="number" name="id" placeholder="Product Id">
+                <input class="username" type="text" name="productName" placeholder="product name">
+                <input class="username" type="text" name="category" placeholder="category">
+                <input class="username" type="number" name="cost" placeholder="cost">
+                <Button class="signin-button" type="submit" value="click">Update Product</Button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+
+        <div th:if="${not #lists.isEmpty(users)}">
+            <h2>user list</h2>
+
+            <table class="table table-stripped">
+                <tr>
+                    <th>User_Id</th>
+                    <th>User_Email</th>
+                    <th>Name</th>
+                    <th>Password</th>
+                    <th>User_Name</th>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.userName}"></td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+    <div class="container">
+
+
+        <div th:if="${not #lists.isEmpty(products)}">
+            <h2>Product List</h2>
+
+            <table class="table table-stripped">
+                <tr>
+                    <th>Product_Id</th>
+                    <th>Product_Name</th>
+                    <th>Category</th>
+                    <th>Cost</th>
+
+                </tr>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.category}"></td>
+                    <td th:text="${product.cost}"></td>
+
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+
+        <div th:if="${not #lists.isEmpty(purchaseHistory)}">
+            <h2>Purchase History List</h2>
+
+            <table class="table table-stripped">
+                <tr>
+                    <th>id</th>
+                    <th>category</th>
+                    <th>product_id</th>
+                    <th>order_id</th>
+                    <th>cost</th>
+                    <th>total</th>
+                    <th>user_id</th>
+                    <th>product_name</th>
+                    <th>date</th>
+                </tr>
+                <tr th:each="purchaseHistories : ${purchaseHistory} " >
+                    <td th:text="${purchaseHistories.id}"></td>
+                    <td th:text="${purchaseHistories.category}"></td>
+                    <td th:text="${purchaseHistories.productId}"></td>
+                    <td th:text="${purchaseHistories.orderId}"></td>
+                    <td th:text="${purchaseHistories.cost}"></td>
+                    <td th:text="${purchaseHistories.total}"></td>
+                    <td th:text="${purchaseHistories.UserId}"></td>
+                    <td th:text="${purchaseHistories.productName}"></td>
+                    <td th:text="${purchaseHistories.date}"></td>
+
+
+
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+</body>
+</html>

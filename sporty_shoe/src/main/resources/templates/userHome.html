@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Home</title>
+    <link rel="stylesheet" type="text/css" href="/css/Home.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a class ="active" href="add">Get All the Products</a></li>
+        <li><a th:text="${price}"></a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li style="float:right"><a class="active" href="#">About</a></li>
+    </ul>
+</nav>
+
+<main class="dashboard">
+    <div class="container">
+
+
+        <div th:if="${not #lists.isEmpty(products)}">
+            <h2>Product List</h2>
+
+            <table class="table">
+                <thead>
+                    <tr class="table-info">
+                        <th scope="col">Product_Id</th>
+                        <th scope="col">Product_Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr  class="table-info" th:each="product : ${products}">
+                        <form action="addProducts" method="post">
+
+                            <th scope="row"  th:text="${product.id}"></th>
+                            <td  th:text="${product.productName}"></td>
+                            <td  th:text="${product.category}"></td>
+                            <td  th:text="${product.cost}"></td>
+                            <td>
+                                <input type="hidden" th:value="${product.id}" name="id"/>
+                                <button type="submit"  class="btn btn-info btn-rounded" name="action" value="order">order</button>
+                            </td>
+                        </form>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+</main>
+</body>
+</html>
